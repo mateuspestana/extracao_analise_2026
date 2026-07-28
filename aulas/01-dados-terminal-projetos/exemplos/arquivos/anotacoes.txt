@@ -1,0 +1,2 @@
+Uma nota de texto livre não tem colunas fixas.
+Ela pode conter títulos, parágrafos, links e observações.

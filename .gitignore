@@ -1,0 +1,17 @@
+# Uso interno do docente — não faz parte do material distribuído aos alunos
+docente/
+prompt_instrucao.md
+teste-autoria.ipynb
+teste-autoria-resolvido.ipynb
+plano-de-aulas.md
+CLAUDE.md
+
+# Lixo de sistema operacional
+.DS_Store
+Thumbs.db
+
+# Ambientes Python e cache
+.venv/
+__pycache__/
+*.py[cod]
+.env
