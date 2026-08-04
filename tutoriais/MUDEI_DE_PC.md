@@ -56,3 +56,5 @@ Abra a pasta certa no VS Code (**File > Open Folder**) e rode um exemplo simples
 ---
 
 Este guia cresce ao longo do semestre. Se uma aula futura exigir instalar mais alguma coisa no sistema, e não só uma biblioteca Python via `requirements.txt` (que já é coberta pelo passo 6), acrescente um passo aqui.
+
+Se bater dúvida no significado de algum comando de Git usado aqui (`clone`, `add`, `commit`, `push`...), consulte o [guia rápido de Git](git-comandos-basicos.md).

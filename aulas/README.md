@@ -25,3 +25,4 @@ Nos projetos introdutórios do curso, `uv` cria o ambiente virtual com `uv venv 
 - [Instalar o `uv`](../tutoriais/instalar-uv.md)
 - [Instalar o Git](../tutoriais/instalar-git.md)
 - [Troquei de máquina: recomeçando do zero](../tutoriais/MUDEI_DE_PC.md), para quando o computador (inclusive os do laboratório) volta zerado.
+- [Quando o `uv` não funciona](../tutoriais/uv_nao_funcionando.md), para quando o computador do laboratório não deixa instalar.
