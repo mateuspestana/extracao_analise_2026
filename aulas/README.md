@@ -15,6 +15,7 @@ As atividades entregues devem ser copiadas e adaptadas no repositório privado d
 - `01-dados-terminal-projetos/`: arquivos, formatos e navegação no terminal.
 - `02-vscode-python/`: ambiente Python com `uv` e leitura de CSV.
 - `03-git-github-repositorio/`: versão, sincronização e organização profissional.
+- `04-coleta-redes/`: coleta em redes sociais com o Zeeschuimer.
 
 ## Convenção para ambientes Python
 
