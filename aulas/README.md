@@ -16,6 +16,13 @@ As atividades entregues devem ser copiadas e adaptadas no repositório privado d
 - `02-vscode-python/`: ambiente Python com `uv` e leitura de CSV.
 - `03-git-github-repositorio/`: versão, sincronização e organização profissional.
 - `04-coleta-redes/`: coleta em redes sociais com o Zeeschuimer.
+- `05-metricas-exploracao/`: métricas de rede social, exploração e agrupamento por hashtag com Pandas.
+- `06-visualizacao-storytelling/`: indicadores, gráficos de barras/linhas/dispersão e boas práticas de visualização com Matplotlib.
+- `07-relatorio-analitico/`: estrutura de relatório analítico, decisões metodológicas e revisão por pares.
+- `08-html-requests-beautifulsoup/`: HTML, requisições com `requests` e extração com BeautifulSoup.
+- `09-playwright-paginas-dinamicas/`: páginas dinâmicas, automação de navegador com Playwright e paginação.
+- `10-limpeza-normalizacao-pipeline/`: limpeza, normalização, validação e pipeline reexecutável de scraping.
+- `11-rest-json-fastapi/`: consumo de API pública (REST, JSON), autenticação por chave e criação de uma API própria com FastAPI.
 
 ## Convenção para ambientes Python
 
