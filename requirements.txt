@@ -2,3 +2,5 @@ pandas
 matplotlib
 wordcloud
 seaborn
+requests
+beautifulsoup4
