@@ -4,3 +4,4 @@ wordcloud
 seaborn
 requests
 beautifulsoup4
+playwright

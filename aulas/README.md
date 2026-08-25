@@ -20,7 +20,7 @@ As atividades entregues devem ser copiadas e adaptadas no repositório privado d
 - `06-visualizacao-storytelling/`: indicadores, gráficos de barras/linhas/dispersão e boas práticas de visualização com Matplotlib.
 - `07-relatorio-analitico/`: estrutura de relatório analítico, decisões metodológicas e revisão por pares.
 - `08-html-requests-beautifulsoup/`: HTML, requisições com `requests` e extração com BeautifulSoup.
-- `09-playwright-paginas-dinamicas/`: páginas dinâmicas, automação de navegador com Playwright e paginação.
+- `09-playwright-paginas-dinamicas/`: Playwright sync no terminal, Ground News (More stories + detalhe de cada story).
 - `10-limpeza-normalizacao-pipeline/`: limpeza, normalização, validação e pipeline reexecutável de scraping.
 - `11-rest-json-fastapi/`: consumo de API pública (REST, JSON), autenticação por chave e criação de uma API própria com FastAPI.
 
