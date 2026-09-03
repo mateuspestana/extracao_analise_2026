@@ -21,11 +21,11 @@ Cada módulo tem, no mínimo, um trabalho avaliado ao final (projeto ou desafio 
 | 1 — Ambiente de desenvolvimento moderno | 1–3 | 29/07 a 05/08 | Terminal, arquivos e formatos de dado; VS Code e Python com `uv`; Git, GitHub e repositório profissional |
 | 2 — Redes sociais e análise de métricas | 4–7 | 07/08 a 19/08 | Coleta com Zeeschuimer; métricas e exploração; visualização e storytelling; relatório analítico |
 | 3 — Web scraping, automação e limpeza | 8–10 | 21/08 a 28/08 | HTML, `requests` e BeautifulSoup; Playwright e páginas dinâmicas; limpeza e pipeline de scraping |
-| 4 — APIs, IA generativa e RAG | 11–13 | 02/09 a 09/09 | REST, JSON e FastAPI; embeddings e busca semântica; chatbot com RAG sobre documentos |
-| 5 — Persistência e organização de dados | 14 | 11/09 | SQLite, DuckDB, Parquet, JSON, Supabase e cache |
-| — Revisão e A1 | 15–19 | 16/09 a 30/09 | Revisão, atendimento, prova prática e correção comentada |
-| 6 — Processamento de Linguagem Natural | 20–22 | 02/10 a 09/10 | Preparação de texto e regex; similaridade, classificação e tópicos; extração estruturada de texto |
-| 7 — Dados públicos e abertos | 23–26 | 14/10 a 23/10 | Dados.gov.br, IBGE e TSE; APIs legislativas e de transparência; construção de indicadores; amostragem e representatividade |
+| 4 — Aprendizado de máquina aplicado | 11–13 | 04/09 a 11/09 | Regressão com scikit-learn; classificação; segmentação e clusterização (Projeto 3, case de ML) |
+| 5 — APIs e persistência de dados | 14 | 25/09 | API de leitura com FastAPI; camada de dados com SQLite, DuckDB e Parquet (dada após a A1; não cai na prova) |
+| — Revisão e A1 | 15–19 | 16/09 a 30/09 | Revisão, atendimento, prova prática (até a Aula 13) e correção comentada |
+| 6 — Processamento de Linguagem Natural | 20–22 | 02/10 a 09/10 | Preparação de texto e regex; modelagem de tópicos (LDA/NMF e BERTopic); extração estruturada e busca semântica |
+| 7 — Dados públicos e abertos | 23–26 | 14/10 a 23/10 | Dados.gov.br, IBGE e TSE; APIs legislativas e de transparência; indicadores, amostragem e representatividade; consolidação do pipeline |
 | 8 — Projeto final | 27–35 | 28/10 a 27/11 | Escopo e arquitetura; backend; frontend; integração; testes e documentação; checkpoint; ajustes finais; apresentações |
 | — Encerramento | 36 | 02/12 (segunda chamada) e 09/12 (substitutiva) | Avaliações finais para quem precisar |
 

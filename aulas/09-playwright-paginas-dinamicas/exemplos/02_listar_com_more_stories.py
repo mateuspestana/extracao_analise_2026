@@ -9,6 +9,7 @@ import time  # para uma pausinha curta entre cliques (educacional / gentil)
 from pathlib import Path  # caminhos de pasta/arquivo de forma simples
 
 from playwright.sync_api import sync_playwright  # API síncrona do Playwright
+from playwright.sync_api import TimeoutError as PlaywrightTimeoutError  # timeout com nome claro
 
 # Pasta dados/ fica um nível acima de exemplos/ (ao lado do notebook da aula).
 pasta_dados = Path(__file__).parent.parent / "dados"
@@ -28,6 +29,40 @@ noticias = []
 # Guarda URLs já vistas, para não repetir a mesma notícia no CSV.
 urls_ja_vistas = set()
 
+
+def fechar_overlays(page):
+    """Fecha cookies e onboarding se estiverem na frente do conteúdo."""
+    for texto_botao in [
+        "Accept",
+        "Aceitar",
+        "Reject non-essential",
+        "Negar não essencial",
+        "Deny",
+        "Accept All",
+        "Accept all",
+        "Aceitar todos",
+    ]:
+        botao = page.get_by_role("button", name=texto_botao)
+        if botao.count() > 0:
+            try:
+                botao.first.click(timeout=2000)
+            except Exception:
+                pass
+
+    botao_fechar = page.locator('[data-testid="onboarding-close-button"]')
+    if botao_fechar.count() > 0:
+        try:
+            botao_fechar.first.click(timeout=2000)
+        except Exception:
+            pass
+
+    # Escape às vezes fecha modal que sobrou na frente.
+    try:
+        page.keyboard.press("Escape")
+    except Exception:
+        pass
+
+
 # Inicia o Playwright; o with fecha tudo ao final.
 with sync_playwright() as p:
     # headless=False: abre a janela do Chromium para a turma ver o que acontece.
@@ -41,79 +76,71 @@ with sync_playwright() as p:
             "Chrome/120.0.0.0 Safari/537.36"
         ),
         locale="en-US",
+        viewport={"width": 1280, "height": 900},
     )
 
     # Nova aba.
     page = context.new_page()
 
     # Abre a página (domcontentloaded é mais estável neste site do que networkidle).
-    page.goto(url, wait_until="domcontentloaded", timeout=45000)
+    page.goto(url, wait_until="domcontentloaded", timeout=60000)
 
-    # Fecha cookies, se o banner aparecer (Accept costuma ser o da edição EN).
-    for texto_botao in ["Accept", "Aceitar", "Reject non-essential", "Negar não essencial", "Deny"]:
-        botao = page.get_by_role("button", name=texto_botao)
-        if botao.count() > 0:
-            try:
-                botao.first.click(timeout=3000)
-            except Exception:
-                pass
-            break
-
-    # Alguns banners usam só o texto "Accept All" / similares.
-    for texto_botao in ["Accept All", "Accept all", "Aceitar todos"]:
-        botao = page.get_by_role("button", name=texto_botao)
-        if botao.count() > 0:
-            try:
-                botao.first.click(timeout=3000)
-            except Exception:
-                pass
-            break
-
-    # Fecha onboarding, se existir.
-    botao_fechar = page.query_selector('[data-testid="onboarding-close-button"]')
-    if botao_fechar is not None:
-        try:
-            botao_fechar.click()
-        except Exception:
-            pass
+    # Tira overlays da frente antes de começar.
+    fechar_overlays(page)
 
     # Espera o primeiro card (attached = existe no DOM, mesmo se animando).
-    page.wait_for_selector('[data-testid="story-item"]', state="attached", timeout=45000)
+    try:
+        page.wait_for_selector('[data-testid="story-item"]', state="attached", timeout=60000)
+    except PlaywrightTimeoutError:
+        # Última tentativa: fechar overlays de novo e esperar mais um pouco.
+        fechar_overlays(page)
+        page.wait_for_selector('[data-testid="story-item"]', state="attached", timeout=30000)
+
+    # Locator do botão: reavalia o elemento a cada uso (evita "elemento saiu do DOM").
+    botao_more = page.locator('[data-testid="load-more-stories-button"]')
 
     # Clica "More stories" algumas vezes para carregar mais cards.
     for clique in range(MAX_MORE_CLICKS):
         # Quantos cards existem agora (antes do clique).
         quantidade_antes = len(page.query_selector_all('[data-testid="story-item"]'))
 
-        # Localiza o botão pelo data-testid estável do site.
-        botao_more = page.query_selector('[data-testid="load-more-stories-button"]')
-
-        # Plano B: texto do botão.
-        if botao_more is None and page.get_by_role("button", name="More stories").count() > 0:
-            botao_more = page.get_by_role("button", name="More stories").first
-
         # Se o botão sumiu, não tem mais o que carregar.
-        if botao_more is None:
-            print(f"clique {clique + 1}: botão More stories não encontrado, parando")
-            break
+        if botao_more.count() == 0:
+            # Plano B: achar pelo texto.
+            botao_texto = page.get_by_role("button", name="More stories")
+            if botao_texto.count() == 0:
+                print(f"clique {clique + 1}: botão More stories não encontrado, parando")
+                break
+            alvo = botao_texto.first
+        else:
+            alvo = botao_more.first
 
-        # Rola até o botão ficar visível (senão o clique pode falhar em silêncio).
-        botao_more.scroll_into_view_if_needed()
-
-        # Clica no botão.
-        botao_more.click()
+        # Rola até o botão e clica (force ajuda se algo transparente cobrir o botão).
+        try:
+            alvo.scroll_into_view_if_needed()
+            fechar_overlays(page)
+            alvo.click(timeout=10000, force=True)
+        except Exception as erro:
+            print(f"clique {clique + 1}: falha ao clicar ({erro.__class__.__name__}), tentando de novo")
+            fechar_overlays(page)
+            try:
+                page.get_by_role("button", name="More stories").first.click(timeout=10000, force=True)
+            except Exception as erro2:
+                print(f"clique {clique + 1}: desisti deste clique ({erro2.__class__.__name__})")
+                continue
 
         # Espera a lista crescer (mais cards no DOM).
         try:
             page.wait_for_function(
                 f"document.querySelectorAll('[data-testid=\"story-item\"]').length > {quantidade_antes}",
-                timeout=20000,
+                timeout=25000,
             )
             agora = len(page.query_selector_all('[data-testid="story-item"]'))
             print(f"clique {clique + 1}: ok, cards agora = {agora}")
-        except Exception:
+        except PlaywrightTimeoutError:
             # Se não cresceu a tempo, avisa e segue (às vezes a página já no limite).
-            print(f"clique {clique + 1}: lista não cresceu a tempo, seguindo assim mesmo")
+            agora = len(page.query_selector_all('[data-testid="story-item"]'))
+            print(f"clique {clique + 1}: lista não cresceu a tempo (ainda {agora} cards), seguindo")
 
         # Pausa curta entre cliques (uso educacional, sem martelar o site).
         time.sleep(1)
@@ -133,8 +160,7 @@ with sync_playwright() as p:
         # URL completa da notícia no Ground News.
         href = link.get_attribute("href")
 
-        # Se o href vier relativo, o Playwright às vezes já devolve absoluto;
-        # se ainda for relativo, montamos na mão.
+        # Se o href vier relativo, montamos na mão.
         if href is None:
             continue
         if href.startswith("/"):
@@ -162,8 +188,11 @@ with sync_playwright() as p:
         # Guarda um dicionário por notícia (vira linha no CSV).
         noticias.append({"titulo": titulo, "url": href})
 
-    # Screenshot de evidência da listagem depois dos cliques.
-    page.screenshot(path=str(pasta_dados / "screenshot-ground-russia-lista.png"))
+    # Screenshot de evidência (só a viewport; página enorme estoura memória fácil).
+    try:
+        page.screenshot(path=str(pasta_dados / "screenshot-ground-russia-lista.png"))
+    except Exception as erro:
+        print(f"screenshot não salvo ({erro.__class__.__name__}), seguindo para o CSV")
 
     # Fecha o navegador.
     browser.close()

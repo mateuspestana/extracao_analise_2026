@@ -5,3 +5,8 @@ seaborn
 requests
 beautifulsoup4
 playwright
+scikit-learn
+fastapi
+uvicorn
+duckdb
+pyarrow

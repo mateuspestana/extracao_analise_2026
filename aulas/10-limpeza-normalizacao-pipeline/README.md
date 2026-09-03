@@ -2,7 +2,7 @@
 
 Comece por [10-limpeza-normalizacao-pipeline.ipynb](10-limpeza-normalizacao-pipeline.ipynb). A aula parte de um CSV bruto (simulando uma coleta real de `books.toscrape.com`, com espaço sobrando, capitalização inconsistente, datas em formatos diferentes, preço como texto, linha duplicada e valor ausente) e ensina a transformar isso num pipeline reexecutável: normalização de texto e data, conversão de preço para número, remoção de duplicata, decisão explícita sobre valor ausente, validação de colunas obrigatórias, tratamento de exceção com `try`/`except` e um log do que foi feito. O resultado tratado é salvo em `dados/processed/`, mantendo `dados/raw/` sempre intocado.
 
-Depois faça [exercicios/exercicio-10-limpeza-normalizacao-pipeline.ipynb](exercicios/exercicio-10-limpeza-normalizacao-pipeline.ipynb). É o **Projeto 4**: pegue uma coleta sua (da Aula 8 ou da Aula 9) e monte o pipeline completo, coleta, limpeza, validação, saída tratada, log e README de reprodução.
+Depois faça [exercicios/exercicio-10-limpeza-normalizacao-pipeline.ipynb](exercicios/exercicio-10-limpeza-normalizacao-pipeline.ipynb). É a **entrega avaliada do Módulo 3**: pegue uma coleta sua (da Aula 8 ou da Aula 9) e monte o pipeline completo, coleta, limpeza, validação, saída tratada, log e README de reprodução.
 
 Use `uv venv .venv` e `uv pip install -r requirements.txt` (a aula precisa só de `pandas`). O exercício tem seu próprio `requirements.txt` dentro de `exercicios/`, porque essa pasta é copiada isoladamente para o repositório de trabalhos.
 
