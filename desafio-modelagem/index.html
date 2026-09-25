@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Desafio de modelagem de dados da FGV: treine, valide e compare modelos de classificação no navegador." />
+    <meta name="color-scheme" content="light" />
+    <title>Desafio de Modelagem · FGV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Ir ao conteúdo</a>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="#inicio" aria-label="Desafio de Modelagem, voltar ao início"><span class="brand-mark">FGV<span>·</span>26</span><span>EXTRAÇÃO E ANÁLISE DE DADOS</span></a>
+        <nav aria-label="Navegação principal">
+          <a href="#desafio">O desafio</a>
+          <a href="#dados">Dados</a>
+          <a href="#laboratorio">Laboratório</a>
+          <a href="#entrega">Entrega</a>
+          <a href="#ranking">Ranking</a>
+        </nav>
+        <span class="topbar-label">PROF. MATHEUS C. PESTANA</span>
+      </header>
+
+      <main id="conteudo">
+        <section class="hero" id="inicio" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span> DESAFIO EXTRA · CLASSIFICAÇÃO</p>
+            <h1 id="hero-title">O modelo só vale quando <em>generaliza.</em></h1>
+            <p class="hero-lede">Você recebe os dados de campanhas sintéticas, testa suas hipóteses e prevê o desempenho de casos que nunca viu. O placar é decidido por dados com rótulos ocultos.</p>
+            <div class="hero-actions">
+              <a class="button button-dark" href="#laboratorio">Abrir laboratório <span aria-hidden="true">↗</span></a>
+              <a class="button button-line" href="#dados">Conhecer os dados <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+          <div class="hero-score" aria-label="Meta proposta de 90 por cento de acurácia">
+            <div class="score-top"><span>ALVO PROPOSTO</span><span>01 / 04</span></div>
+            <div class="score-number">90<span>%</span></div>
+            <div class="score-track"><span></span></div>
+            <p>de acurácia no teste privado<br />para até <strong>+0,5 ponto</strong></p>
+            <span class="score-foot">A regra final será confirmada pelo docente.</span>
+          </div>
+        </section>
+
+        <div class="fact-strip" aria-label="Resumo da base">
+          <div><strong>40.000</strong><span>exemplos com resposta</span></div>
+          <div><strong>20.000</strong><span>exemplos sem resposta</span></div>
+          <div><strong>36</strong><span>variáveis preditoras</span></div>
+          <div><strong>01</strong><span>problema de classificação</span></div>
+        </div>
+
+        <section id="desafio" class="section challenge-section">
+          <div class="section-heading"><p class="eyebrow">01 / O DESAFIO</p><h2>Aprender com uma parte.<br /><em>Convencer na outra.</em></h2></div>
+          <div class="challenge-grid">
+            <article class="step-card"><span class="step-number">01</span><h3>Explore</h3><p>Inspecione os campos, ausências, escalas e distribuição da classe. A coluna <code>id</code> identifica linhas; ela não é uma variável preditora.</p></article>
+            <article class="step-card"><span class="step-number">02</span><h3>Compare</h3><p>Separe parte do treino para validação. Teste classificadores do scikit-learn, pré-processamento e ajustes de parâmetros.</p></article>
+            <article class="step-card"><span class="step-number">03</span><h3>Treine de novo</h3><p>Depois de escolher um caminho pela sua validação, ajuste o pipeline com as 40 mil linhas rotuladas e preveja os 20 mil casos ocultos.</p></article>
+            <article class="step-card"><span class="step-number">04</span><h3>Entregue</h3><p>Gere <code>id,previsao</code> com um resultado 0 ou 1 para cada caso do teste. Guarde também o notebook que explica suas decisões.</p></article>
+          </div>
+          <aside class="rule-note"><span>REGRA DO JOGO</span><p>O placar mostrará apenas a acurácia na parte pública do teste. A parte privada, desconhecida durante a competição, decidirá a pontuação após o prazo. O gabarito não é carregado nesta página.</p></aside>
+        </section>
+
+        <section id="dados" class="section data-section">
+          <div class="section-heading"><p class="eyebrow">02 / MATERIAL DE TRABALHO</p><h2>Comece pelos <em>dados.</em></h2><p>Os arquivos podem ser usados neste laboratório ou em um notebook local. NumPy, pandas e scikit-learn bastam.</p></div>
+          <div class="data-grid">
+            <a class="data-card" href="./dados/treino.csv" download><span class="file-type">CSV / 01</span><strong>Treino rotulado</strong><span>40 mil linhas · inclui <code>alto_desempenho</code></span><span class="file-action">Baixar treino <b aria-hidden="true">↗</b></span></a>
+            <a class="data-card" href="./dados/teste.csv" download><span class="file-type">CSV / 02</span><strong>Teste oculto</strong><span>20 mil linhas · sem a coluna de resposta</span><span class="file-action">Baixar teste <b aria-hidden="true">↗</b></span></a>
+            <a class="data-card" href="./dicionario.md" download><span class="file-type">MD / 03</span><strong>Dicionário</strong><span>Significado dos campos e formato da entrega</span><span class="file-action">Baixar dicionário <b aria-hidden="true">↗</b></span></a>
+          </div>
+          <p class="data-footnote">A base é inteiramente sintética. Os exemplos públicos e privados estão misturados no mesmo arquivo de teste; a divisão não é indicada pelos IDs.</p>
+        </section>
+
+        <section id="laboratorio" class="section lab-section">
+          <div class="lab-heading"><div><p class="eyebrow">03 / LABORATÓRIO PYTHON</p><h2>Experimente no <em>navegador.</em></h2><p>O caderno abaixo começa com um modelo simples. Edite e execute as células em ordem; seu código fica salvo neste navegador.</p></div><div class="lab-actions"><button id="prepare-button" class="button button-lime" type="button">Preparar Python</button><button id="export-notebook" class="button button-outline-light" type="button">Baixar caderno .ipynb</button></div></div>
+          <div id="runtime-status" class="runtime-status" role="status">O ambiente Python ainda não foi iniciado. Na primeira execução, o navegador baixa as bibliotecas.</div>
+          <div id="notebook" class="notebook" aria-label="Caderno executável"><p class="loading-note">Carregando caderno…</p></div>
+          <div class="lab-bottom"><p>Seu código e suas métricas locais são visíveis apenas para você. As previsões finais serão avaliadas pelo corretor quando ele estiver conectado.</p><button id="download-predictions" class="button button-lime" type="button">Baixar previsoes.csv <span aria-hidden="true">↓</span></button></div>
+        </section>
+
+        <section id="entrega" class="section delivery-section">
+          <div class="section-heading"><p class="eyebrow">04 / ENTREGA</p><h2>Uma linha por <em>previsão.</em></h2><p>Antes de enviar, valide seu arquivo. A conferência abaixo verifica o formato e os IDs, sem revelar sua acurácia.</p></div>
+          <div class="delivery-grid">
+            <div class="format-card"><span>FORMATO ESPERADO</span><pre>id,previsao
+100042817,1
+100019366,0
+100053094,1
+...</pre><p>Os números acima ilustram o formato; use os IDs reais de <code>teste.csv</code>. São exatamente 20.000 linhas de previsão, sem repetição.</p></div>
+            <div class="upload-card"><label for="prediction-file">Escolha seu arquivo de previsões</label><input id="prediction-file" type="file" accept=".csv,text/csv" /><p id="file-status" role="status">Nenhum arquivo conferido ainda.</p><div class="upload-divider"></div><label for="student-alias">Nome no ranking</label><input id="student-alias" type="text" maxlength="40" placeholder="Como quer aparecer no placar" autocomplete="nickname" /><label for="student-code">Código individual</label><input id="student-code" type="password" autocomplete="off" placeholder="Fornecido pelo docente" /><button id="submit-button" class="button button-dark" type="button" disabled>Enviar para correção <span aria-hidden="true">↗</span></button><p class="backend-note" id="submission-note">O envio online ainda não está disponível. Você já pode preparar e validar o CSV.</p></div>
+          </div>
+        </section>
+
+        <section id="ranking" class="section ranking-section">
+          <div class="ranking-heading"><div><p class="eyebrow">05 / PLACAR PÚBLICO</p><h2>Ranking <em>ao vivo.</em></h2><p>Quando o corretor estiver ativo, esta tabela será atualizada automaticamente. Só o resultado público aparecerá durante o desafio.</p></div><div class="ranking-state" id="ranking-state"><span class="state-dot"></span> AGUARDANDO CORRETOR</div></div>
+          <div class="ranking-table-wrap"><table class="ranking-table"><thead><tr><th>POSIÇÃO</th><th>PARTICIPANTE</th><th>ACURÁCIA PÚBLICA</th><th>ENVIOS</th></tr></thead><tbody id="ranking-body"><tr><td colspan="4" class="ranking-empty">O ranking aparecerá aqui quando a correção online for ativada.</td></tr></tbody></table></div>
+          <p id="ranking-updated" class="ranking-updated">Nenhuma pontuação privada é exibida durante a atividade.</p>
+        </section>
+      </main>
+
+      <footer class="footer"><span>FGV · EXTRAÇÃO E ANÁLISE DE DADOS · 2026.2</span><span>PROF. MATHEUS C. PESTANA</span><a href="#inicio">VOLTAR AO TOPO ↑</a></footer>
+    </div>
+  </body>
+</html>

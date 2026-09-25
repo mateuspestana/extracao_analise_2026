@@ -1,0 +1,39 @@
+name: Publicar desafio de modelagem
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "desafio-modelagem/**"
+      - ".github/workflows/desafio-modelagem-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages-desafio-modelagem
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - name: Obter arquivos públicos
+        uses: actions/checkout@v6
+      - name: Preparar Pages
+        uses: actions/configure-pages@v5
+      - name: Enviar somente a pasta pública do desafio
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: desafio-modelagem
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v4
