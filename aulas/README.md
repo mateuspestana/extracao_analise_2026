@@ -25,7 +25,7 @@ As atividades entregues devem ser copiadas e adaptadas no repositório privado d
 - `11-regressao-scikit-learn/`: aprendizado supervisionado e regressão com scikit-learn; features, alvo, vazamento, `train_test_split`, `LinearRegression` e árvore, MAE/R² e baseline.
 - `12-classificacao/`: classificação com scikit-learn; o rótulo como decisão, `LogisticRegression`, matriz de confusão, precisão/recall/F1, threshold e árvore.
 - `13-segmentacao-clusterizacao/`: aprendizado não-supervisionado; `StandardScaler`, `KMeans`, escolha de `k` (cotovelo e silhueta), perfil e interpretação de clusters. Inclui o Projeto 3 (case de ML).
-- `14-api-e-persistencia/`: consumo de API pública (REST, JSON), API própria com FastAPI, e camada de dados com SQLite, DuckDB e Parquet.
+- `20-api-e-persistencia/`: consumo de API pública (REST, JSON), API própria com FastAPI, e camada de dados em Parquet (por que é um bom formato e como a API lê dele).
 
 ## Convenção para ambientes Python
 
